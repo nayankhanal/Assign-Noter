@@ -6,53 +6,66 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
-  // const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([]);
+  const [note1, setNote1] = useState([]);
+  const [note2, setNote2] = useState({
+    title: "",
+    content: ""
+  });
 
-  // function addNote(newNote) {
-  //   setNotes(prevNotes => {
-  //     return [...prevNotes, newNote];
-  //   });
-  // }
 
-  // function deleteNote(id) {
-  //   setNotes(prevNotes => {
-  //     return prevNotes.filter((noteItem, index) => {
-  //       return index !== id;
-  //     });
-  //   });
-  // }
+  function addNote(newNote) {
+    setNote2(() => {
+      return({
+        title: newNote.title,
+        content: newNote.content
+      } );
+    })
+  }
 
-  const [line, setLine] = useState("");
-
-  useEffect(() => {
-    axios.get("/msg")
-    .then(res => { console.log(res.message)})
-    // .then(data => { setLine(data?.message)})
-    .catch((error) => {console.log(error)})
-  },[]);
-
+  function deleteNote(id) {
+      axios.delete(`http://localhost:8080/msg/${id}`);
+  }
   
+  const [line, setLine] = useState("");
+    
+
+    useEffect(() => {
+      axios.post("http://localhost:8080/msg",{
+
+      body: note2
+
+    })
+    },[note2])
+
+    useEffect(() => {
+      const asfun = async() => {
+        const dats = await axios.get("http://localhost:8080/msg");
+        console.log(dats.data);
+        setNote1(dats.data);
+      }
+      asfun();
+    },[note1]); 
+
   return (
     <div>
-      {/* <Header />
+      <Header />
       <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
+      {note1.map((noteItem, index) => {
         return (
           <Note
             key={index}
-            id={index}
+            id={noteItem._id}
             title={noteItem.title}
             content={noteItem.content}
             onDelete={deleteNote}
           />
         );
       })}
-      <Footer /> */}
-      <h1> 
-        {line}
-      </h1>
+      <Footer />
     </div>
   );
 }
+
 
 export default App;
