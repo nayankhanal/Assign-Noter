@@ -4,13 +4,16 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
+import styles from "../cssStyle/Keeper.module.css";
+import "../cssStyle/KeeperGlobal.css";
 
-function App() {
+function App(props) {
   const [notes, setNotes] = useState([]);
   const [note1, setNote1] = useState([]);
   const [note2, setNote2] = useState({
     title: "",
-    content: ""
+    content: "",
+    owner: ""
   });
 
 
@@ -18,7 +21,8 @@ function App() {
     setNote2(() => {
       return({
         title: newNote.title,
-        content: newNote.content
+        content: newNote.content,
+        owner: newNote.owner
       } );
     })
   }
@@ -40,17 +44,17 @@ function App() {
 
     useEffect(() => {
       const asfun = async() => {
-        const dats = await axios.get("http://localhost:8080/msg");
-        console.log(dats.data);
+        const dats = await axios.get("http://localhost:8080/msg/"+props.user._id);
+        // console.log(dats.data);
         setNote1(dats.data);
       }
       asfun();
     },[note1]); 
-
+    
   return (
-    <div>
-      <Header />
-      <CreateArea onAdd={addNote} />
+    <div className="keeper">
+      <Header checkAccount={props.checkAccount} />
+      <CreateArea onAdd={addNote} user={props.user} />
       {note1.map((noteItem, index) => {
         return (
           <Note

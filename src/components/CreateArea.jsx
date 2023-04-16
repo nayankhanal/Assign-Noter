@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-
 import AddIcon from "@mui/icons-material/Add";
 // import Fab from "@mui/material/Fab";
+import styles from "../cssStyle/Keeper.module.css";
+import "../cssStyle/KeeperGlobal.css";
 
 function CreateArea(props) {
   const [expand, newExpand] = useState(false);
 
   const [note, setNote] = useState({
     title: "",
-    content: ""
+    content: "",
+    owner: props.user
   });
 
   function handleChange(event) {
@@ -26,7 +28,8 @@ function CreateArea(props) {
     props.onAdd(note);
     setNote({
       title: "",
-      content: ""
+      content: "",
+      owner: props.user
     });
     event.preventDefault();
   }
@@ -37,7 +40,7 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form className="create-note">
+      <form className={styles["create-note"]}>
         {expand && (
           <input
             name="title"

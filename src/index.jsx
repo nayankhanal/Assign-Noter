@@ -8,6 +8,8 @@ import Logs from "./componentsTwo/Logs"
 ReactDOM.render(
     <BrowserRouter>
         <Logs />
-    </BrowserRouter>,
-    document.getElementById("root")
+     </BrowserRouter> 
+    ,document.getElementById("root")
     );
+
+    

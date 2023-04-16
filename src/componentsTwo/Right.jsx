@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import styles from "../cssStyle/Login.module.css";
+import "../cssStyle/LoginGlobal.css";
 
 function Right(props) {
 
@@ -7,10 +9,10 @@ function Right(props) {
 	}
 
     return (
-        <div className="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button className="ghost" idName="signUp" onClick={exchange}>Sign Up</button>
+        <div className={styles["overlay-panel"] + " " + styles["overlay-right"]}>
+				<h1 className="h1Login">Hello, Friend!</h1>
+				<p className="pLogin">Enter your personal details and start journey with us</p>
+				<button className={styles.ghost + " " + "buttonLogin"} idName={styles.signUp} onClick={exchange}>Sign Up</button>
 			</div>
     );
 }

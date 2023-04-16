@@ -9,6 +9,7 @@ const { Password } = require("@mui/icons-material");
 const bcrypt = require("bcrypt");
 const saltRounds = 10; 
 const passportInit = require("./LocalAuth.js");
+const googleAuth = require("./googleAuth");
 
 //requiring for authentication, cookies & Sessions
 const session = require("express-session");
@@ -16,15 +17,22 @@ const passport = require("passport");
 // const passportLocalMongoose = require("passport-local-mongoose");
 
 
-app.use(cors({origin: true, credentials: true}));
+// app.use(cors({origin: true, credentials: true}));
+app.use(
+  cors({
+    origin: "http://localhost:3000", 
+    credentials: true
+  })
+);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: false,
-  cookie: { secure: true }
+  saveUninitialized: true,
+  // cookie: { secure: true }
 }));
 
 app.use(passport.initialize());
@@ -65,8 +73,17 @@ mongoose.connect("mongodb://localhost:27017/keeperDB",{useNewUrlParser: true});
 
 // passport.use(Signup.createStrategy());
 passportInit(passport);
+googleAuth(passport);
 // passport.serializeUser(Signup.serializeUser());
 // passport.deserializeUser(Signup.deserializeUser());
+
+function checkAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    // console.log(req.user);
+    // res.send(req.user);
+    next();
+  }
+}
 
 
 app.get("/",function(req,res){
@@ -77,15 +94,17 @@ app.get("/",function(req,res){
 
 
 //API for react page to fetch data from here
-app.get("/msg",function(req,res){
-  Keep.find( (err, memos) => {
+app.get("/msg/:id",function(req,res){
+  // console.log(req.params.id);
+  Keep.find({owner: req.params.id}, (err, memos) => {
     if(err){
       res.send(err);
       console.log(err);
     }else{
+      // console.log(memos);
       res.send(memos);
     }
-    
+  
   } )
 })
 
@@ -98,7 +117,8 @@ app.post("/msg",(req,res) => {
   if(bods.title !== "" || bods.content !== ""){
     const datum = new Keep({
       title : bods.title,
-      content : bods.content
+      content : bods.content,
+      owner: bods.owner
     })
     datum.save();
 
@@ -150,11 +170,16 @@ app.post("/msg",(req,res) => {
 
 
 // Idea 2
-app.post('/login', passport.authenticate('local'),  function(req, res) {
-	res.send("logged in from first file.");
-    // console.log(res.user);
-    console.log("logged in from first file");
-});
+app.post('/login', passport.authenticate('local'), 
+ function(req, res) {
+	// res.send("logged in from first file.");
+  //may be 
+  console.log(req.user);
+    res.send(req.user);
+    
+    // console.log("logged in from first file");
+}
+);
 
 
 //Idea 3
@@ -280,6 +305,21 @@ app.delete("/msg/:id",(req,res) => {
 })
 
 // module.exports = {Signup};
+
+
+//google authentication------------------------------------------
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    console.log("success in gAuth.");
+    res.redirect('http://localhost:3000/keeper');
+    // res.send(req.user);
+  });
+
 
 app.listen(8080,function(){
   console.log("successfully ran");

@@ -10,7 +10,7 @@ function passportInit(passport){
         function(username, password, done) {
             console.log("reached to local authentication phase");
             Signup.findOne({ username: username }, function (err, user) {
-            if (err) { console.log("signup data error"); return done(err); }
+            if (err) { console.log("signup data error " + err); return done(err); }
             if (!user) { console.log("user doesnot exist"); return done(null, false); }
             // if (user.password != password) {
             //     return done(null, false);
