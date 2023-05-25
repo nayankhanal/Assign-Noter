@@ -316,7 +316,8 @@ app.get('/auth/google/callback',
   function(req, res) {
     // Successful authentication, redirect home.
     console.log("success in gAuth.");
-    res.redirect('http://localhost:3000/keeper');
+    // console.log(req.user);
+    res.redirect('http://localhost:3000/auth/google/keeper');
     // res.send(req.user);
   });
 

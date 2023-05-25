@@ -14,12 +14,13 @@ function googleAuth(passport){
       },
       function(accessToken, refreshToken, profile, cb) {
         console.log(profile);
-        Signup.findOrCreate({ googleId: profile.id },{name: profile.displayName}, function (err, user) {
+        Signup.findOrCreate({ googleId: profile.id }, function (err, user) {
           return cb(err, user);
         });
       }
     ));
 }
+// ,{name: profile.displayName}
 
 module.exports = googleAuth;
 

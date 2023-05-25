@@ -50,6 +50,20 @@ function App(props) {
       }
       asfun();
     },[note1]); 
+
+
+  	// useEffect(async () =>{
+    //     console.log("trying to get data1");
+    //     const gogUser = await axios.get("http://localhost:8080/auth/google/callback",{
+    //       withCredentials: true,
+    //       });
+    //       console.log("trying to get data2");
+    //     props.checkAccount(gogUser.data);
+    //     console.log("trying to get data3");
+    //     navigate("/keeper");
+    //     console.log("trying to get data4");
+    //   },[])
+   
     
   return (
     <div className="keeper">

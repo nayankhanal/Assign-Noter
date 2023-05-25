@@ -54,10 +54,27 @@ function Signin(props) {
 
 	async function gAuth(){
 		// window.location.href = "http://localhost:8080/auth/google";
+		window.open("http://localhost:8080/auth/google","_self");
 		const gUser = await axios.get("http://localhost:8080/auth/google/callback");
 		props.checkAccount(gUser.data);
 		navigate("/keeper");
 	}
+
+	useEffect(() => {
+		console.log("trying to get data0");
+		async () =>{
+			console.log("trying to get data1");
+			const gogUser = await axios.get("http://localhost:8080/auth/google/callback",{
+				withCredentials: true,
+			  });
+			  console.log("trying to get data2");
+			  console.log(gogUser);
+			props.checkAccount(gogUser.data);
+			console.log("trying to get data3");
+			navigate("/keeper");
+			console.log("trying to get data4");
+		}
+	},[])
 
 
 	return (
@@ -74,7 +91,9 @@ function Signin(props) {
 				<input className="inputLogin" onChange={userIn} name="password" value={userInData.password} type="password" placeholder="Password" />
 				<a className="aLogin" href="#">Forgot your password?</a>
 				<button className="buttonLogin" onClick={LogIn}>Log In</button>
+				{/* <button onclick={gAuth}>Login Alt</button> */}
 			</form>
+			
 		</div>
 	);
 }

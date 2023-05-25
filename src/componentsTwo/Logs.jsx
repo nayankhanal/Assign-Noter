@@ -11,10 +11,15 @@ function Logs() {
 
    const navigate = useNavigate();
 
-   // useEffect(async () =>{
-   //    const googleUser = await axios.get("http://localhost:8080/auth/google");
+   // useEffect( async () =>{
+   //    const googleUser = axios.get("http://localhost:8080/auth/google/callback",{
+   //       profile : user
+   //    })
+      
    //    if(googleUser){
-   //       localStorage.setItem("myUser", JSON.stringify(googleUser));
+   //      const goUser = localStorage.setItem("myUser", JSON.stringify(googleUser));
+   //       // const googleUser = JSON.parse(localStorage.getItem("myUser"));
+   //       setLoginUser(goUser)
    //       navigate("/keeper");
    //    }
       
