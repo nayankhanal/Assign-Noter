@@ -1,54 +1,12 @@
 {
-  "name": "using-pre-built-react-components",
+  "name": "keeping",
   "version": "1.0.0",
-  "keywords": [],
-  "main": "src/index.js",
-  "dependencies": {
-    "@emotion/react": "11.10.4",
-    "@emotion/styled": "11.10.4",
-    "@material-ui/core": "4.12.4",
-    "@material-ui/icons": "4.11.3",
-    "@mui/icons-material": "5.10.6",
-    "@mui/material": "5.10.8",
-    "axios": "^1.1.3",
-    "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.1",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "express-session": "^1.17.3",
-    "mongodb": "^5.0.0",
-    "mongoose": "^6.8.0",
-    "nodemon": "^2.0.20",
-    "npm": "8.19.2",
-    "passport": "^0.6.0",
-    "passport-google-oauth20": "^2.0.0",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^7.1.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-hook-form": "7.36.1",
-    "react-router-dom": "^6.6.2"
-  },
-  "devDependencies": {
-    "css-loader": "^6.7.3",
-    "style-loader": "^3.3.1",
-    "typescript": "3.3.3",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
-  },
+  "description": "Keeper app but trying to render json data in react app from node through axios for testing purpose.",
+  "main": "webpack.config.js",
+  "devDependencies": {},
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }

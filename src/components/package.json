@@ -2,15 +2,22 @@
   "name": "components",
   "version": "1.0.0",
   "description": "",
-  "main": "LocalAuth.js",
+  "main": "database.js",
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "dotenv": "^16.0.3",
+    "mongoose-findorcreate": "^4.0.0",
+    "oauth": "^0.9.15",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-oauth2": "^1.7.0",
+    "passport-strategy": "^1.0.0",
+    "uid2": "^0.0.4",
+    "utils-merge": "^1.0.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.0.3",
-    "mongoose-findorcreate": "^4.0.0",
-    "passport-google-oauth20": "^2.0.0"
-  }
+  "license": "ISC"
 }
