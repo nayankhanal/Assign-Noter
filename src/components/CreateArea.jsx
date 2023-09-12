@@ -10,7 +10,7 @@ function CreateArea(props) {
   const [note, setNote] = useState({
     title: "",
     content: "",
-    owner: props.user
+    // owner: props.user
   });
 
   function handleChange(event) {
@@ -28,8 +28,8 @@ function CreateArea(props) {
     props.onAdd(note);
     setNote({
       title: "",
-      content: "",
-      owner: props.user
+      content: ""
+      // owner: props.user
     });
     event.preventDefault();
   }

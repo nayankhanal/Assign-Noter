@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Keeper app but trying to render json data in react app from node through axios for testing purpose.",
   "main": "webpack.config.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react-scripts": "^2.1.3"
+  }
 }

@@ -12,8 +12,8 @@ function App(props) {
   const [note1, setNote1] = useState([]);
   const [note2, setNote2] = useState({
     title: "",
-    content: "",
-    owner: ""
+    content: ""
+    // owner: ""
   });
 
 
@@ -21,8 +21,8 @@ function App(props) {
     setNote2(() => {
       return({
         title: newNote.title,
-        content: newNote.content,
-        owner: newNote.owner
+        content: newNote.content
+        // owner: newNote.owner
       } );
     })
   }
@@ -44,7 +44,7 @@ function App(props) {
 
     useEffect(() => {
       const asfun = async() => {
-        const dats = await axios.get("http://localhost:8080/msg/"+props.user._id);
+        const dats = await axios.get("http://localhost:8080/msg/");
         // console.log(dats.data);
         setNote1(dats.data);
       }
@@ -67,8 +67,8 @@ function App(props) {
     
   return (
     <div className="keeper">
-      <Header checkAccount={props.checkAccount} />
-      <CreateArea onAdd={addNote} user={props.user} />
+      <Header />
+      <CreateArea onAdd={addNote} />
       {note1.map((noteItem, index) => {
         return (
           <Note
